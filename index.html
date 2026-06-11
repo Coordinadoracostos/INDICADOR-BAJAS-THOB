@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Informe de Bajas 2026 — THOB — Hasta La Pizza Baby</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1a1917;--ink-2:#4a4844;--ink-3:#8a8780;
+  --line:#e4e1d9;--surface:#f7f5f0;--white:#fff;
+  --purple:#534AB7;--purple-lt:#EEEDFE;--purple-dk:#3C3489;
+  --teal:#1D9E75;--teal-lt:#E1F5EE;--teal-dk:#085041;
+  --amber:#EF9F27;--amber-lt:#FAEEDA;--amber-dk:#412402;
+  --red:#E24B4A;--red-lt:#FCEBEB;--red-dk:#501313;
+  --blue:#185FA5;--blue-lt:#E6F1FB;
+  --gray:#888780;--gray-lt:#F1EFE8;
+  --font:'DM Sans',system-ui,sans-serif;
+  --mono:'DM Mono','Courier New',monospace;
+}
+@media print{body{background:#fff}.shell{padding:0;max-width:100%}.page{box-shadow:none;border-radius:0}.no-print{display:none!important}}
+@media(max-width:600px){
+  .shell{padding:12px 8px 32px}
+  .page{border-radius:12px}
+  .topbar{padding:14px 16px 12px}
+  .topbar-title{font-size:17px}
+  .topbar-badge{font-size:10px;padding:3px 9px}
+  .filter-bar{padding:10px 14px;gap:8px}
+  .currency-note{margin-left:0;width:100%}
+  .inner{padding:14px 14px}
+  .nav-tabs{overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none;-webkit-overflow-scrolling:touch;border-radius:8px;padding:4px}
+  .nav-tabs::-webkit-scrollbar{display:none}
+  .tab-btn{white-space:nowrap;flex-shrink:0;font-size:12px;padding:6px 12px}
+  .kpi-strip{grid-template-columns:repeat(2,1fr)!important}
+  .kpi-val{font-size:16px}
+  .two-col{grid-template-columns:1fr!important}
+  .sum-tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%}
+  .sum-tbl{min-width:420px}
+  .sum-tbl th,.sum-tbl td{font-size:10px;padding:5px 5px}
+  .chart-h200{height:180px}
+  .chart-h280{height:220px}
+  .view-header{gap:8px}
+  .view-title{font-size:15px}
+  .var-badge{font-size:11px;padding:3px 9px}
+  .card{padding:12px 13px}
+  .bl{width:80px;font-size:10px}
+  .bv{width:48px;font-size:9px}
+  .footer{padding:10px 14px;font-size:10px;flex-direction:column;gap:4px}
+  .print-btn{padding:6px 12px;font-size:11px}
+}
+
+body{font-family:var(--font);background:#edeae3;color:var(--ink);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.shell{max-width:960px;margin:0 auto;padding:24px 16px 48px}
+.page{background:var(--white);border-radius:16px;box-shadow:0 2px 24px rgba(0,0,0,.10);overflow:hidden}
+.topbar{background:var(--purple);padding:20px 28px 16px;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.topbar-title{font-size:22px;font-weight:600;color:#fff;letter-spacing:-.4px;line-height:1.2}
+.topbar-sub{font-size:12px;color:rgba(255,255,255,.7);margin-top:4px}
+.topbar-right{text-align:right;flex-shrink:0}
+.topbar-date{font-size:11px;color:rgba(255,255,255,.55)}
+.topbar-badge{display:inline-block;margin-top:5px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);color:#fff;font-size:11px;font-weight:500;padding:4px 12px;border-radius:20px}
+.filter-bar{padding:12px 28px;background:var(--surface);border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.filter-group{display:flex;align-items:center;gap:8px}
+.filter-label{font-size:11px;font-weight:500;color:var(--ink-3);text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+.filter-select{padding:7px 12px;border-radius:8px;border:1px solid var(--line);background:var(--white);color:var(--ink);font-family:var(--font);font-size:13px;cursor:pointer;outline:none}
+.filter-select:focus{border-color:var(--purple)}
+.currency-note{margin-left:auto;display:flex;align-items:center;gap:6px;background:var(--amber-lt);border:1px solid #FAC775;border-radius:8px;padding:6px 12px}
+.currency-note span{font-size:11.5px;color:var(--amber-dk);font-weight:500}
+.no-data-msg{padding:40px 28px;text-align:center;color:var(--ink-3);font-size:14px}
+.inner{padding:22px 28px}
+.view-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.view-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.view-title{font-size:17px;font-weight:600;color:var(--ink)}
+.view-sub{font-size:12px;color:var(--ink-3);margin-top:1px}
+.var-badge{margin-left:auto;font-size:12px;font-weight:500;padding:4px 12px;border-radius:20px;white-space:nowrap}
+.var-up{background:var(--red-lt);color:var(--red-dk)}
+.var-down{background:var(--teal-lt);color:var(--teal-dk)}
+.var-neu{background:var(--gray-lt);color:var(--ink-3)}
+.nav-tabs{display:flex;gap:5px;flex-wrap:wrap;padding:5px;background:var(--surface);border-radius:10px;border:1px solid var(--line);margin-bottom:18px}
+.tab-btn{padding:7px 15px;border-radius:7px;border:none;background:transparent;color:var(--ink-2);font-family:var(--font);font-size:12.5px;font-weight:400;cursor:pointer;transition:all .14s;white-space:nowrap}
+.tab-btn:hover{background:var(--white)}
+.tab-btn.active{background:var(--white);font-weight:500;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.kpi-strip{display:grid;gap:8px;margin-bottom:16px}
+.kpi{background:var(--surface);border-radius:10px;padding:11px 14px;border:1px solid var(--line);transition:transform .12s}
+.kpi.clickable{cursor:pointer}
+.kpi.clickable:hover{transform:translateY(-2px);border-color:var(--purple)}
+.kpi-lbl{font-size:10px;font-weight:500;color:var(--ink-3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.kpi-val{font-size:19px;font-weight:600;color:var(--ink);font-family:var(--mono);line-height:1.1;margin-bottom:3px}
+.kpi-sub{font-size:11px;font-weight:500}
+.up{color:var(--red)}.down{color:var(--teal)}.neu{color:var(--ink-3);font-weight:400}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.card{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:15px 17px}
+.card-title{font-size:10px;font-weight:600;color:var(--ink-3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:11px}
+.bar-row{display:flex;align-items:center;gap:7px;margin-bottom:7px}
+.bl{font-size:11px;color:var(--ink-2);width:100px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bt{flex:1;height:7px;background:var(--surface);border-radius:4px;overflow:hidden}
+.bf{height:100%;border-radius:4px}
+.bp{font-size:11px;font-weight:600;color:var(--ink);width:34px;text-align:right;flex-shrink:0;font-family:var(--mono)}
+.bv{font-size:10px;color:var(--ink-3);width:60px;text-align:right;flex-shrink:0;font-family:var(--mono)}
+.top-tbl{width:100%;border-collapse:collapse}
+.top-tbl th{font-size:10px;color:var(--ink-3);font-weight:400;padding:3px 0;border-bottom:1px solid var(--line);text-align:left}
+.top-tbl th:last-child{text-align:right}
+.top-tbl td{font-size:11px;padding:5px 0;border-bottom:1px solid var(--line);color:var(--ink-2);line-height:1.3}
+.top-tbl tr:last-child td{border-bottom:none}
+.top-tbl .tc{text-align:right;font-weight:600;color:var(--blue);white-space:nowrap;padding-left:8px;width:1%;font-family:var(--mono)}
+.sum-tbl{width:100%;border-collapse:collapse}
+.sum-tbl th{font-size:10px;color:var(--ink-3);font-weight:500;padding:5px 7px;border-bottom:1px solid var(--line);background:var(--surface);text-align:left}
+.sum-tbl th:not(:first-child){text-align:right}
+.sum-tbl td{font-size:11px;padding:6px 7px;border-bottom:1px solid var(--line);font-family:var(--mono)}
+.sum-tbl td:first-child{font-family:var(--font);font-weight:500;color:var(--ink)}
+.sum-tbl td:not(:first-child){text-align:right;color:var(--ink-2)}
+.sum-tbl tr:last-child td{border-bottom:none;background:var(--surface);font-weight:600}
+.pill{display:inline-block;padding:2px 7px;border-radius:10px;font-size:10px;font-weight:600;font-family:var(--font)}
+.pill.up{background:var(--red-lt);color:var(--red-dk)}
+.pill.down{background:var(--teal-lt);color:var(--teal-dk)}
+.pill.neu{background:var(--gray-lt);color:var(--ink-3)}
+.chart-h200{position:relative;width:100%;height:200px;margin-top:12px}
+.chart-h280{position:relative;width:100%;height:280px}
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:9px}
+.leg{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--ink-2)}
+.leg-sq{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+.note{padding:10px 12px;background:var(--surface);border-radius:8px;font-size:11px;color:var(--ink-3);line-height:1.6;margin-top:10px;border:1px solid var(--line)}
+.note strong{color:var(--ink-2);font-weight:500}
+.sub-div{font-size:10px;font-weight:600;color:var(--ink-3);text-transform:uppercase;letter-spacing:.5px;margin:12px 0 7px;padding-top:11px;border-top:1px solid var(--line)}
+.footer{padding:13px 28px;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:11px;color:var(--ink-3);flex-wrap:wrap;gap:8px;background:var(--surface)}
+.print-btn{display:flex;align-items:center;gap:6px;margin-bottom:10px;margin-left:auto;padding:7px 15px;border-radius:8px;border:1px solid var(--line);background:var(--white);color:var(--ink-2);font-family:var(--font);font-size:12px;cursor:pointer}
+.print-btn:hover{background:var(--surface)}
+.fade{animation:fi .2s ease}
+@keyframes fi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<noscript>
+<div style="font-family:system-ui,sans-serif;background:#1a1917;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px">
+  <div style="background:#fff;border-radius:16px;padding:28px 24px;max-width:340px;width:100%">
+    <div style="width:48px;height:48px;background:#EEEDFE;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#534AB7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    <div style="font-size:17px;font-weight:600;color:#1a1917;margin-bottom:8px;line-height:1.3">Este informe no puede abrirse aquí</div>
+    <div style="font-size:13px;color:#4a4844;line-height:1.6;margin-bottom:20px">WhatsApp y algunos visores de correo bloquean el contenido interactivo. Para ver el informe correctamente, ábrelo en <strong>Chrome</strong> o <strong>Safari</strong>.</div>
+    <div style="font-size:12px;font-weight:600;color:#8a8780;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px">Cómo hacerlo en 2 pasos</div>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px">
+      <div style="display:flex;gap:10px;align-items:flex-start;background:#f7f5f0;border-radius:8px;padding:10px 12px">
+        <div style="width:22px;height:22px;background:#534AB7;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:700;color:#fff">1</div>
+        <div style="font-size:12.5px;color:#1a1917;line-height:1.5">Toca los <strong>tres puntos</strong> o el ícono de menú en la esquina del visor</div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:flex-start;background:#f7f5f0;border-radius:8px;padding:10px 12px">
+        <div style="width:22px;height:22px;background:#534AB7;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:700;color:#fff">2</div>
+        <div style="font-size:12.5px;color:#1a1917;line-height:1.5">Selecciona <strong>"Abrir en Chrome"</strong> o <strong>"Abrir en Safari"</strong></div>
+      </div>
+    </div>
+    <div style="background:#E1F5EE;border-radius:8px;padding:10px 12px;font-size:12px;color:#04342C;line-height:1.5">
+      <strong>Alternativa:</strong> descarga el archivo, guárdalo en tu celular y ábrelo directamente desde Chrome o Safari.
+    </div>
+    <div style="margin-top:16px;padding-top:14px;border-top:1px solid #e4e1d9;font-size:11px;color:#8a8780;text-align:center">
+      Informe de Bajas 2026 · The Hacienda · Área: Costos e Inventarios
+    </div>
+  </div>
+</div>
+</noscript>
+<div class="shell">
+  <div style="display:flex;justify-content:flex-end;margin-bottom:10px">
+    <button class="print-btn no-print" onclick="window.print()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      Imprimir / Guardar PDF
+    </button>
+  </div>
+  <div class="page">
+
+    <div class="topbar">
+      <div>
+        <div class="topbar-title">Informe de Bajas 2026 — THOB</div>
+        <div class="topbar-sub">THOB — Hasta La Pizza Baby &nbsp;·&nbsp; Área: Costos e Inventarios</div>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-date">Elaborado: junio 2026</div>
+        <div class="topbar-badge" id="topBadge">THOB · Mayo 2026</div>
+      </div>
+    </div>
+
+    <div class="filter-bar no-print">
+      <div class="filter-group">
+        <span class="filter-label">Mes</span>
+        <select class="filter-select" id="selMes" onchange="onMesChange()">
+          <option value="Mayo">Mayo 2026</option>
+<option value="Abril">Abril 2026</option>
+<option value="Marzo">Marzo 2026</option>
+<option value="Febrero">Febrero 2026</option>
+<option value="Enero">Enero 2026</option>
+        </select>
+      </div>
+      <div class="currency-note">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#BA7517" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span>Todas las cifras en pesos colombianos (COP). Los valores expresados como <strong>$X,XXM</strong> corresponden a millones de pesos.</span>
+      </div>
+    </div>
+
+    <div id="mainContent"></div>
+
+    <div class="footer">
+      <span>Fuente: Sistema de inventarios The Hacienda · THOB · 2026 &nbsp;·&nbsp; <strong>Cifras en COP · $X,XXM = millones de pesos</strong></span>
+      <span>Área: Costos e Inventarios · Junio 2026</span>
+    </div>
+  </div>
+</div>
+
+<script>
+const SITE = "THOB";
+const SITE_FULL = "THOB — Hasta La Pizza Baby";
+const RAW = {"bodegas": ["BAR", "COCINA"], "meses": {"Enero": {"total": 948281, "bodegas": {"COCINA": {"total": 803808, "tipos": {"Merma": 162554, "Baja desde Pos": 174993, "Baja Operación": 466261}, "top5": {"PERA": 792, "PAN ENTRADA": 841, "SALSA QUESO AZUL X 1 GR": 4309, "QUESO MOZZARELLA DE BUFALA (OVALINES)": 5026, "TOMATES FRESCOS": 6386, "MIX HONGOS": 7247}, "cats": {"CARNICOS": 26668, "LACTEOS": 131420, "RECETA ALIMENTOS": 219964, "FRUVER": 425756}}, "BAR": {"total": 144474, "tipos": {"Baja Operación": 144474}, "top5": {"ROMERO": 2259, "HIERBABUENA": 12257, "TINTO RAMON BILBAO CRIANZA": 129958}, "cats": {"FRUVER": 14516, "VINOS": 129958}}}}, "Febrero": {"total": 597933, "bodegas": {"COCINA": {"total": 596537, "tipos": {"Merma": 102858, "Baja desde Pos": 169266, "Baja Operación": 324413}, "top5": {"LIMON TAHITI": 850, "PAN ENTRADA": 1473, "SALSA QUESO AZUL X 1 GR": 1696, "ENELDO": 2088, "COLIFLOR ROSTIZADA X GR": 2799, "SALSA POMODORO X 1 GR": 4386}, "cats": {"LACTEOS": 94918, "RECETA ALIMENTOS": 244060, "FRUVER": 257560}}, "BAR": {"total": 1396, "tipos": {"Baja Operación": 1396}, "top5": {"NARANJA TANGELO": 1396}, "cats": {"FRUVER": 1396}}}}, "Marzo": {"total": 880031, "bodegas": {"COCINA": {"total": 880031, "tipos": {"Baja Operación": 216560, "Merma": 306140, "Baja desde Pos": 357331}, "top5": {"PAN ENTRADA": 675, "PISTACHOS": 732, "ACEITE DE TRUFA": 1074, "CEBOLLA BLANCA": 1338, "LIMON TAHITI": 1461, "COLIFLOR ROSTIZADA X GR": 1700}, "cats": {"DESPENSA": 1806, "CARNICOS": 28388, "LACTEOS": 169076, "FRUVER": 249477, "RECETA ALIMENTOS": 431284}}}}, "Abril": {"total": 576340, "bodegas": {"COCINA": {"total": 552416, "tipos": {"Merma": 74148, "Baja desde Pos": 238080, "Baja Operación": 240189}, "top5": {"PAN ENTRADA": 397, "SALSA POMODORO X 1 GR": 740, "ENELDO": 754, "QUESO MOZZARELLA                                                           ": 1190, "TOMATES FRESCOS": 2178, "NARANJA TANGELO": 2282}, "cats": {"LACTEOS": 44661, "FRUVER": 215074, "RECETA ALIMENTOS": 292682}}, "BAR": {"total": 23924, "tipos": {"Baja Operación": 23924}, "top5": {"JENGIBRE": 23924}, "cats": {"FRUVER": 23924}}}}, "Mayo": {"total": 767964, "bodegas": {"COCINA": {"total": 767964, "tipos": {"Baja Pruebas": 1818, "Baja desde Pos": 181854, "Merma": 249693, "Baja Operación": 334600}, "top5": {"PAN ENTRADA": 1568, "AREQUIPE": 1818, "MASA MADRE X 1 GR": 3080, "SALSA POMODORO X 1 GR": 4392, "NARANJA TANGELO": 4766, "LIMON TAHITI": 5143}, "cats": {"DESPENSA": 28576, "LACTEOS": 163095, "RECETA ALIMENTOS": 210220, "FRUVER": 366074}}}}}, "tendencia": {"BAR": [144474, 1396, 0, 23924, 0], "COCINA": [803808, 596537, 880031, 552416, 767964]}};
+const MESES = ["Enero","Febrero","Marzo","Abril","Mayo"];
+const COLORS = ["#534AB7","#1D9E75","#EF9F27","#E24B4A","#378ADD","#888780","#D85A30","#0F6E56"];
+const TIPO_C = {"Baja Operación":"#534AB7","Baja guest":"#378ADD","Baja Pruebas":"#EF9F27","Merma":"#E24B4A","Consumo aceite":"#1D9E75","Baja Proveedor":"#888780","Baja desde Pos":"#D85A30","Baja fotos o video creativa":"#B5D4F4","Baja fotos":"#B5D4F4"};
+let charts = {};
+
+function fmt(v){return "$"+Math.round(v).toLocaleString("es-CO")}
+function fmtM(v){return "$"+(v/1e6).toFixed(2)+"M"}
+function fmtK(v){return v>=1e6?"$"+(v/1e6).toFixed(2)+"M":v>=1e3?"$"+Math.round(v/1e3)+"K":fmt(v)}
+function pct(v,t){return t>0?((v/t)*100).toFixed(1)+"%":"0%"}
+function varPct(c,p){return p>0?((c-p)/p*100).toFixed(1):null}
+function pillVar(v){
+  if(v===null) return '<span class="pill neu">N/D</span>';
+  const n=parseFloat(v);
+  if(n>0) return '<span class="pill up">↑ +'+v+'%</span>';
+  if(n<0) return '<span class="pill down">↓ '+v+'%</span>';
+  return '<span class="pill neu">0%</span>';
+}
+function varBadge(v){
+  if(v===null) return "";
+  const n=parseFloat(v);
+  if(n>10) return '<span class="var-badge var-up">↑ +'+v+'% vs mes anterior</span>';
+  if(n<-5) return '<span class="var-badge var-down">↓ '+v+'% vs mes anterior</span>';
+  return '<span class="var-badge var-neu">'+v+'% vs mes anterior</span>';
+}
+function destroyCharts(){Object.values(charts).forEach(c=>c.destroy());charts={}}
+
+function donut(id,data,bgs,lbls){
+  const ctx=document.getElementById(id);if(!ctx)return;
+  if(charts[id]){charts[id].destroy();delete charts[id];}
+  charts[id]=new Chart(ctx,{type:"doughnut",data:{labels:lbls,datasets:[{data,backgroundColor:bgs,borderWidth:3,borderColor:"#fff",hoverOffset:4}]},options:{responsive:true,maintainAspectRatio:false,cutout:"62%",plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>" "+c.label+": "+parseFloat(c.parsed).toFixed(1)+"%"}}}}});
+}
+
+function lineChart(id,datasets,xlabels){
+  const ctx=document.getElementById(id);if(!ctx)return;
+  if(charts[id]){charts[id].destroy();delete charts[id];}
+  charts[id]=new Chart(ctx,{type:"line",data:{labels:xlabels,datasets:datasets.map(d=>{return{label:d.label,data:d.data.map(v=>Math.round(v/1e6*100)/100),borderColor:d.color,backgroundColor:d.color+"15",borderWidth:2.5,tension:0.35,fill:false,pointBackgroundColor:d.color,pointRadius:4,pointHoverRadius:7,borderDash:d.dash||[]}})},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:"index",intersect:false},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>" "+c.dataset.label+": $"+c.parsed.y.toFixed(2)+"M"}}},scales:{x:{grid:{color:"rgba(0,0,0,0.05)"},ticks:{color:"#8a8780",font:{size:11},autoSkip:false}},y:{min:0,grid:{color:"rgba(0,0,0,0.05)"},ticks:{color:"#8a8780",font:{size:11},callback:v=>"$"+v.toFixed(1)+"M"}}}}});
+}
+
+function renderBars(tipos,total,limit){
+  limit=limit||4;
+  return Object.entries(tipos).sort((a,b)=>b[1]-a[1]).slice(0,limit).map(([t,v])=>{
+    const p=(v/total*100),col=TIPO_C[t]||"#888780";
+    return `<div class="bar-row"><span class="bl" title="${t}">${t}</span><div class="bt"><div class="bf" style="width:${Math.max(p,0.5).toFixed(1)}%;background:${col}"></div></div><span class="bp">${p.toFixed(1)}%</span><span class="bv">${fmtK(v)}</span></div>`;
+  }).join("");
+}
+
+function renderTop5(top5){
+  const entries=Object.entries(top5).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  return `<table class="top-tbl"><thead><tr><th>Artículo</th><th>Costo</th></tr></thead><tbody>`+
+    entries.map(([a,v])=>`<tr><td>${a.charAt(0)+a.slice(1).toLowerCase()}</td><td class="tc">${fmt(v)}</td></tr>`).join("")+
+  `</tbody></table>`;
+}
+
+function renderLegend(tipos){
+  return Object.keys(tipos).sort((a,b)=>tipos[b]-tipos[a]).slice(0,5).map(t=>{
+    const col=TIPO_C[t]||"#888780";
+    return `<span class="leg"><span class="leg-sq" style="background:${col}"></span>${t}</span>`;
+  }).join("");
+}
+
+
+function genAlerts(bodegas, mesData, prevData, total) {
+  const alerts = [];
+  bodegas.forEach((b,i) => {
+    const bd = mesData.bodegas[b];
+    const prevBd = prevData ? prevData.bodegas[b] : null;
+    const vb = prevBd ? parseFloat(varPct(bd.total, prevBd.total)) : null;
+    const tipos = bd.tipos || {};
+    const bodTotal = bd.total;
+
+    // Alerta: incremento critico > 30%
+    if (vb !== null && vb > 30) {
+      const tipo_dom = Object.entries(tipos).sort((a,b)=>b[1]-a[1])[0];
+      alerts.push({ kind:'red', bod:b,
+        title: b + ' — ↑ +' + vb.toFixed(1) + '% vs mes anterior',
+        text: 'Incremento de ' + fmtK(bd.total - (prevBd?prevBd.total:0)) + ' adicionales. ' +
+              (tipo_dom ? 'Tipo dominante: ' + tipo_dom[0] + ' (' + pct(tipo_dom[1],bodTotal) + ').' : '')
+      });
+    }
+
+    // Alerta: baja guest > 40% del total bodega
+    const guest = tipos['Baja guest'] || 0;
+    if (guest > 0 && guest/bodTotal > 0.4) {
+      alerts.push({ kind:'amber', bod:b,
+        title: b + ' — Baja guest ' + pct(guest,bodTotal),
+        text: fmtK(guest) + ' en baja guest (' + pct(guest,bodTotal) + '). Verificar presupuesto asignado y aprobación por evento.'
+      });
+    }
+
+    // Alerta: merma > 20% del total bodega
+    const merma = tipos['Merma'] || 0;
+    if (merma > 0 && merma/bodTotal > 0.2) {
+      alerts.push({ kind:'red', bod:b,
+        title: b + ' — Merma elevada ' + pct(merma,bodTotal),
+        text: fmtK(merma) + ' en merma (' + pct(merma,bodTotal) + '). Revisar rotación FIFO y cadena de frío.'
+      });
+    }
+
+    // Alerta: baja pruebas > 25%
+    const pruebas = tipos['Baja Pruebas'] || 0;
+    if (pruebas > 0 && pruebas/bodTotal > 0.25) {
+      alerts.push({ kind:'amber', bod:b,
+        title: b + ' — Baja pruebas ' + pct(pruebas,bodTotal),
+        text: fmtK(pruebas) + ' en pruebas (' + pct(pruebas,bodTotal) + '). Establecer límite por sesión y aprobación de líder.'
+      });
+    }
+
+    // OK: reduccion > 10%
+    if (vb !== null && vb < -10) {
+      alerts.push({ kind:'green', bod:b,
+        title: b + ' — ↓ ' + vb.toFixed(1) + '% vs mes anterior',
+        text: 'Reducción de ' + fmtK(Math.abs(bd.total - (prevBd?prevBd.total:0))) + '. Buen control operativo.'
+      });
+    }
+  });
+
+  if (alerts.length === 0) {
+    alerts.push({ kind:'green', bod:'',
+      title: 'Sin alertas críticas este mes',
+      text: 'Todos los indicadores dentro de rangos normales para ' + SITE + '.'
+    });
+  }
+  return alerts;
+}
+
+function renderAlerts(alerts) {
+  return alerts.map(a => {
+    const bg   = a.kind==='red' ? '#FCEBEB' : a.kind==='amber' ? '#FAEEDA' : '#E1F5EE';
+    const txt  = a.kind==='red' ? '#501313' : a.kind==='amber' ? '#412402' : '#04342C';
+    const icon = a.kind==='red' ? '&#9888;' : a.kind==='amber' ? '!' : '&#10003;';
+    const ibg  = a.kind==='red' ? '#E24B4A' : a.kind==='amber' ? '#EF9F27' : '#1D9E75';
+    const hint = a.bod ? '<span style="font-size:10px;font-weight:400;opacity:.6;margin-left:6px">Ver detalle →</span>' : '';
+    let div = '<div style="display:flex;gap:12px;align-items:flex-start;background:'+bg+';border-radius:10px;padding:12px 14px;margin-bottom:8px"';
+    if(a.bod){
+      const tabId = a.bod.replace(/ /g,'_');
+      div += ' onclick="switchTab(\'' + tabId + '\',document.getElementById(\'tab-' + tabId + '\'))" style="display:flex;gap:12px;align-items:flex-start;background:'+bg+';border-radius:10px;padding:12px 14px;margin-bottom:8px;cursor:pointer"';
+    }
+    div += '>';
+    div += '<div style="width:28px;height:28px;border-radius:50%;background:'+ibg+';display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0;margin-top:1px">'+icon+'</div>';
+    div += '<div style="flex:1;min-width:0">';
+    div += '<div style="font-size:12px;font-weight:600;color:'+txt+';line-height:1.3;margin-bottom:3px;display:flex;align-items:center;flex-wrap:wrap;gap:4px">'+a.title+hint+'</div>';
+    div += '<div style="font-size:11px;color:'+txt+';opacity:.85;line-height:1.55">'+a.text+'</div>';
+    div += '</div></div>';
+    return div;
+  }).join('');
+}
+
+function onMesChange(){
+  destroyCharts();
+  const mes=document.getElementById("selMes").value;
+  document.getElementById("topBadge").textContent=SITE+" · "+mes+" 2026";
+  renderContent(mes);
+}
+
+function renderContent(mes){
+  const content=document.getElementById("mainContent");
+  const sData=RAW;
+  const mesData=sData.meses[mes];
+
+  if(!mesData){
+    content.innerHTML=`<div class="no-data-msg"><div style="font-size:32px;margin-bottom:12px">📭</div><div style="font-weight:500;margin-bottom:6px">Sin datos para ${SITE} — ${mes} 2026</div><div style="font-size:12px">Este sitio no registra bajas en el período seleccionado.</div></div>`;
+    return;
+  }
+
+  const bodegas=Object.keys(mesData.bodegas);
+  const total=mesData.total;
+  const mesIdx=MESES.indexOf(mes);
+  const prevMes=mesIdx>0?MESES[mesIdx-1]:null;
+  const prevData=prevMes?sData.meses[prevMes]:null;
+  const prevTotal=prevData?prevData.total:0;
+  const vTotal=prevTotal>0?varPct(total,prevTotal):null;
+
+  // TABS
+  let tabsHtml=`<div class="nav-tabs no-print"><button class="tab-btn active" id="tab-resumen" onclick="switchTab('resumen',this)">Resumen ${SITE}</button>`;
+  bodegas.forEach(b=>{const id=b.replace(/ /g,"_");tabsHtml+=`<button class="tab-btn" id="tab-${id}" onclick="switchTab('${id}',this)">${b.charAt(0)+b.slice(1).toLowerCase()}</button>`;});
+  tabsHtml+=`<button class="tab-btn" id="tab-tendencia" onclick="switchTab('tendencia',this)">Tendencia mensual</button></div>`;
+
+  // KPI strip
+  const kpiCols=Math.min(bodegas.length+1,5);
+  let kpiHtml=`<div class="kpi-strip" style="grid-template-columns:repeat(${kpiCols},1fr)"><div class="kpi"><div class="kpi-lbl">Total ${SITE}</div><div class="kpi-val">${fmtM(total)}</div><div class="kpi-sub ${parseFloat(vTotal)>0?"up":parseFloat(vTotal)<0?"down":"neu"}">${vTotal?(parseFloat(vTotal)>0?"↑ +":"↓ ")+vTotal+"% vs "+prevMes:"Base"}</div></div>`;
+  bodegas.forEach((b,i)=>{
+    const bd=mesData.bodegas[b];
+    const prevBd=prevData?prevData.bodegas[b]:null;
+    const vb=prevBd?varPct(bd.total,prevBd.total):null;
+    const id=b.replace(/ /g,"_");
+    kpiHtml+=`<div class="kpi clickable" onclick="switchTab('${id}',document.getElementById('tab-${id}'))"><div class="kpi-lbl">${b} →</div><div class="kpi-val">${fmtM(bd.total)}</div><div class="kpi-sub ${vb&&parseFloat(vb)>0?"up":vb&&parseFloat(vb)<0?"down":"neu"}">${vb?(parseFloat(vb)>0?"↑ +":"↓ ")+vb+"% vs "+(prevMes||"—"):fmtK(bd.total)}</div></div>`;
+  });
+  kpiHtml+=`</div>`;
+
+  // Summary table
+  let sumRows=bodegas.map(b=>{
+    const bd=mesData.bodegas[b];const prevBd=prevData?prevData.bodegas[b]:null;
+    const vb=prevBd?varPct(bd.total,prevBd.total):null;
+    const topTipo=Object.entries(bd.tipos).sort((a,b)=>b[1]-a[1])[0];
+    return `<tr><td>${b}</td><td>${fmt(bd.total)}</td><td>${pct(bd.total,total)}</td><td>${pillVar(vb)}</td><td>${topTipo?topTipo[0]+" ("+pct(topTipo[1],bd.total)+")":"—"}</td></tr>`;
+  }).join("");
+  sumRows+=`<tr><td>Total ${SITE}</td><td>${fmt(total)}</td><td>100%</td><td>${pillVar(vTotal)}</td><td>—</td></tr>`;
+
+  const donutData=bodegas.map(b=>parseFloat(pct(mesData.bodegas[b].total,total)));
+  const donutColors=bodegas.map((_,i)=>COLORS[i%COLORS.length]);
+  const legendItems=bodegas.map((b,i)=>`<span class="leg"><span class="leg-sq" style="background:${COLORS[i%COLORS.length]}"></span>${b} ${pct(mesData.bodegas[b].total,total)}</span>`).join("");
+
+  const alerts = genAlerts(bodegas, mesData, prevData, total);
+  const alertsHtml = renderAlerts(alerts);
+
+  let resumenView=`<div id="view-resumen" class="fade">
+    <div class="view-header">
+      <div class="view-icon" style="background:var(--purple-lt)">📊</div>
+      <div><div class="view-title">Resumen ${SITE} — ${mes} 2026</div><div class="view-sub">Haz clic en una alerta para ir al detalle de esa bodega</div></div>
+      ${varBadge(vTotal)}
+    </div>
+    ${kpiHtml}
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+      <div style="font-size:10px;font-weight:600;color:var(--ink-3);text-transform:uppercase;letter-spacing:.6px">Alertas por bodega</div>
+      <div style="font-size:10px;color:var(--ink-3)">Toca una alerta para ver el detalle</div>
+    </div>
+    <div style="margin-bottom:16px">${alertsHtml}</div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">Participación por bodega</div>
+        <div class="chart-h200"><canvas id="cResumen" role="img" aria-label="Participacion por bodega">${bodegas.map(b=>b+" "+pct(mesData.bodegas[b].total,total)).join(", ")}</canvas></div>
+        <div class="legend">${legendItems}</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Comparativo${prevMes?" — "+mes+" vs "+prevMes:""}</div>
+        <div class="sum-tbl-wrap"><table class="sum-tbl">
+          <thead><tr><th>Bodega</th><th>Total</th><th>% sitio</th><th>Var</th><th>Tipo dominante</th></tr></thead>
+          <tbody>${sumRows}</tbody>
+        </table></div>
+        <div class="note" style="margin-top:12px">Todas las cifras en pesos colombianos (COP). <strong>$X,XXM = millones de pesos.</strong></div>
+      </div>
+    </div>
+  </div>`;
+
+  // Bodega views
+  let bodegaViews="";
+  bodegas.forEach((b,bi)=>{
+    const bd=mesData.bodegas[b];const prevBd=prevData?prevData.bodegas[b]:null;
+    const vb=prevBd?varPct(bd.total,prevBd.total):null;
+    const id=b.replace(/ /g,"_");
+    const topTipo=Object.entries(bd.tipos).sort((a,b)=>b[1]-a[1])[0];
+    const topTipo2=Object.entries(bd.tipos).sort((a,b)=>b[1]-a[1])[1];
+    const dEntries=Object.entries(bd.tipos).sort((a,b)=>b[1]-a[1]).slice(0,5);
+
+    bodegaViews+=`<div id="view-${id}" style="display:none">
+      <div class="view-header">
+        <div class="view-icon" style="background:${COLORS[bi%COLORS.length]}22;font-size:18px">🏪</div>
+        <div><div class="view-title">Bodega ${b}</div><div class="view-sub">${pct(bd.total,total)} del total ${SITE} · ${mes} 2026</div></div>
+        ${varBadge(vb)}
+      </div>
+      <div class="kpi-strip" style="grid-template-columns:repeat(4,1fr)">
+        <div class="kpi"><div class="kpi-lbl">Total ${b}</div><div class="kpi-val">${fmtM(bd.total)}</div><div class="kpi-sub ${vb&&parseFloat(vb)>0?"up":vb&&parseFloat(vb)<0?"down":"neu"}">${vb?(parseFloat(vb)>0?"↑ +":"↓ ")+vb+"% vs "+(prevMes||"—"):fmtK(bd.total)}</div></div>
+        <div class="kpi"><div class="kpi-lbl">${topTipo?topTipo[0]:""}</div><div class="kpi-val">${topTipo?pct(topTipo[1],bd.total):"—"}</div><div class="kpi-sub neu">${topTipo?fmtK(topTipo[1]):""}</div></div>
+        <div class="kpi"><div class="kpi-lbl">${topTipo2?topTipo2[0]:""}</div><div class="kpi-val">${topTipo2?pct(topTipo2[1],bd.total):"—"}</div><div class="kpi-sub neu">${topTipo2?fmtK(topTipo2[1]):""}</div></div>
+        <div class="kpi"><div class="kpi-lbl">% del sitio</div><div class="kpi-val">${pct(bd.total,total)}</div><div class="kpi-sub neu">${SITE} ${mes}</div></div>
+      </div>
+      <div class="two-col">
+        <div class="card">
+          <div class="card-title">Distribución por tipo de baja</div>
+          ${renderBars(bd.tipos,bd.total)}
+          <div class="chart-h200"><canvas id="c_${id}" role="img" aria-label="Tipos baja ${b}">${dEntries.map(([t,v])=>t+": "+pct(v,bd.total)).join(", ")}</canvas></div>
+          <div class="legend">${renderLegend(bd.tipos)}</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Top artículos por costo</div>
+          ${renderTop5(bd.top5)}
+          <div class="sub-div">Top categorías</div>
+          ${renderBars(bd.cats,bd.total,4)}
+        </div>
+      </div>
+    </div>`;
+  });
+
+  // Tendencia view
+  const tBodegas=Object.keys(sData.tendencia);
+  const tColors=tBodegas.map((_,i)=>COLORS[i%COLORS.length]);
+  const tDash=[[],[7,3],[2,5],[4,4]];
+  const tLegend=tBodegas.map((b,i)=>`<span class="leg"><span class="leg-sq" style="background:${tColors[i]}"></span>${b}</span>`).join("");
+  let tRows=tBodegas.map(b=>{
+    const vals=sData.tendencia[b];
+    return `<tr><td>${b}</td>${MESES.map((m,i)=>vals[i]>0?`<td>${fmt(vals[i])}</td>`:`<td style="color:var(--ink-3)">—</td>`).join("")}</tr>`;
+  }).join("");
+  const totals=MESES.map((_,i)=>tBodegas.reduce((s,b)=>s+sData.tendencia[b][i],0));
+  tRows+=`<tr><td>Total ${SITE}</td>${totals.map(v=>v>0?`<td>${fmt(v)}</td>`:`<td style="color:var(--ink-3)">—</td>`).join("")}</tr>`;
+
+  let tendenciaView=`<div id="view-tendencia" style="display:none">
+    <div class="view-header">
+      <div class="view-icon" style="background:var(--purple-lt);font-size:18px">📈</div>
+      <div><div class="view-title">Tendencia mensual 2026 — ${SITE}</div><div class="view-sub">Evolución de bajas por bodega — enero a mayo 2026</div></div>
+    </div>
+    <div class="card" style="margin-bottom:14px">
+      <div class="card-title">Evolución mensual por bodega ($ millones COP)</div>
+      <div class="chart-h280"><canvas id="cTrend" role="img" aria-label="Tendencia mensual ${SITE}">${tBodegas.map(b=>b+": "+sData.tendencia[b].map(v=>fmtK(v)).join(", ")).join(" | ")}</canvas></div>
+      <div class="legend" style="margin-top:10px">${tLegend}</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Detalle mensual por bodega ($ COP)</div>
+      <table class="sum-tbl">
+        <thead><tr><th>Bodega</th>${MESES.map(m=>`<th>${m}</th>`).join("")}</tr></thead>
+        <tbody>${tRows}</tbody>
+      </table>
+    </div>
+  </div>`;
+
+  content.innerHTML=`<div class="inner">${tabsHtml}${resumenView}${bodegaViews}${tendenciaView}</div>`;
+  setTimeout(()=>donut("cResumen",donutData,donutColors,bodegas),60);
+}
+
+function switchTab(name,btn){
+  const mes=document.getElementById("selMes").value;
+  const sData=RAW;
+  const mesData=sData.meses[mes];
+
+  document.querySelectorAll("[id^='view-']").forEach(el=>el.style.display="none");
+  const el=document.getElementById("view-"+name);
+  if(el){el.style.display="block";el.classList.remove("fade");void el.offsetWidth;el.classList.add("fade");}
+  document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
+  if(btn) btn.classList.add("active");
+
+  setTimeout(()=>{
+    if(name==="resumen"){
+      if(!mesData) return;
+      const bodegas=Object.keys(mesData.bodegas);
+      const total=mesData.total;
+      const donutData=bodegas.map(b=>parseFloat(((mesData.bodegas[b].total/total)*100).toFixed(1)));
+      const donutColors=bodegas.map((_,i)=>COLORS[i%COLORS.length]);
+      donut("cResumen",donutData,donutColors,bodegas);
+    } else if(name==="tendencia"){
+      const tBodegas=Object.keys(sData.tendencia);
+      const tDash=[[],[7,3],[2,5],[4,4]];
+      lineChart("cTrend",tBodegas.map((b,i)=>{return{label:b,data:sData.tendencia[b],color:COLORS[i%COLORS.length],dash:tDash[i]||[]}}),[...MESES]);
+    } else {
+      if(!mesData) return;
+      const bodegas=Object.keys(mesData.bodegas);
+      const total=mesData.total;
+      const bod=bodegas.find(b=>b.replace(/ /g,"_")===name);
+      if(bod){
+        const bd=mesData.bodegas[bod];
+        const entries=Object.entries(bd.tipos).sort((a,b)=>b[1]-a[1]).slice(0,5);
+        donut("c_"+name,entries.map(([t,v])=>parseFloat(((v/bd.total)*100).toFixed(1))),entries.map(([t])=>TIPO_C[t]||"#888780"),entries.map(([t])=>t));
+      }
+    }
+  },60);
+}
+
+// Init — default to last available month
+const firstMes = document.getElementById("selMes").value;
+renderContent(firstMes);
+</script>
+</body>
+</html>

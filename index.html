@@ -210,7 +210,268 @@ body{font-family:var(--font);background:#edeae3;color:var(--ink);-webkit-print-c
 <script>
 const SITE = "THOB";
 const SITE_FULL = "THOB — Hasta La Pizza Baby";
-const RAW = {"bodegas": ["BAR", "COCINA"], "meses": {"Enero": {"total": 948281.49, "bodegas": {"COCINA": {"total": 803807.73, "tipos": {"Merma": 162553.61, "Baja desde Pos": 174992.92, "Baja Operación": 466261.2}, "top5": [{"art": "Rugula", "pres": "GR", "costo": 205698.34, "cantidad": 2962.0}, {"art": "Mezclum", "pres": "GR", "costo": 129655.34, "cantidad": 1870.0}, {"art": "Queso granapadano", "pres": "GR", "costo": 108572.78, "cantidad": 976.0}, {"art": "Pepperoni tentazione", "pres": "UND", "costo": 63271.25, "cantidad": 7.0}, {"art": "Albahaca", "pres": "GR", "costo": 53511.35, "cantidad": 1899.0}], "cats": {"CARNICOS": 26668.29, "LACTEOS": 131419.88, "RECETA ALIMENTOS": 219963.89, "FRUVER": 425755.67}}, "BAR": {"total": 144473.76, "tipos": {"Baja Operación": 144473.76}, "top5": [{"art": "Tinto ramon bilbao crianza", "pres": "BOTELLA X 750 ML", "costo": 129957.51, "cantidad": 2.0}, {"art": "Hierbabuena", "pres": "GR", "costo": 12257.33, "cantidad": 336.0}, {"art": "Romero", "pres": "GR", "costo": 2258.92, "cantidad": 130.0}], "cats": {"FRUVER": 14516.25, "VINOS": 129957.51}}}}, "Febrero": {"total": 597933.25, "bodegas": {"COCINA": {"total": 596537.16, "tipos": {"Merma": 102858.08, "Baja desde Pos": 169266.04, "Baja Operación": 324413.04}, "top5": [{"art": "Albahaca", "pres": "GR", "costo": 135227.7, "cantidad": 4670.0}, {"art": "Queso granapadano", "pres": "GR", "costo": 78944.55, "cantidad": 694.0}, {"art": "Base masa x und", "pres": "SUBRECETA", "costo": 64440.24, "cantidad": 59.0}, {"art": "Mano di napoli", "pres": "UND", "costo": 45594.06, "cantidad": 3.0}, {"art": "Mezclum", "pres": "GR", "costo": 34998.89, "cantidad": 466.0}], "cats": {"LACTEOS": 94917.74, "RECETA ALIMENTOS": 244059.75, "FRUVER": 257559.67}}, "BAR": {"total": 1396.09, "tipos": {"Baja Operación": 1396.09}, "top5": [{"art": "Naranja tangelo", "pres": "GR", "costo": 1396.09, "cantidad": 126.0}], "cats": {"FRUVER": 1396.09}}}}, "Marzo": {"total": 880030.84, "bodegas": {"COCINA": {"total": 880030.84, "tipos": {"Baja Operación": 216560.1, "Merma": 306139.59, "Baja desde Pos": 357331.15}, "top5": [{"art": "Queso granapadano", "pres": "GR", "costo": 151849.97, "cantidad": 1352.0}, {"art": "Mano di napoli", "pres": "UND", "costo": 91188.12, "cantidad": 6.0}, {"art": "Rugula", "pres": "GR", "costo": 84041.46, "cantidad": 1160.0}, {"art": "Pepperoni tentazione", "pres": "UND", "costo": 72310.0, "cantidad": 8.0}, {"art": "Albahaca", "pres": "GR", "costo": 67048.98, "cantidad": 2554.0}], "cats": {"DESPENSA": 1806.34, "CARNICOS": 28387.79, "LACTEOS": 169075.77, "FRUVER": 249476.9, "RECETA ALIMENTOS": 431284.04}}}}, "Abril": {"total": 576340.37, "bodegas": {"COCINA": {"total": 552415.96, "tipos": {"Merma": 74147.76, "Baja desde Pos": 238079.54, "Baja Operación": 240188.66}, "top5": [{"art": "Mezclum", "pres": "GR", "costo": 110442.57, "cantidad": 1548.0}, {"art": "Albahaca", "pres": "GR", "costo": 73092.28, "cantidad": 2498.0}, {"art": "Base masa x und", "pres": "SUBRECETA", "costo": 53465.46, "cantidad": 51.0}, {"art": "Pepperoni tentazione", "pres": "UND", "costo": 45193.75, "cantidad": 5.0}, {"art": "Queso granapadano", "pres": "GR", "costo": 43471.16, "cantidad": 388.0}], "cats": {"LACTEOS": 44660.71, "FRUVER": 215073.52, "RECETA ALIMENTOS": 292681.73}}, "BAR": {"total": 23924.41, "tipos": {"Baja Operación": 23924.41}, "top5": [{"art": "Jengibre", "pres": "GR", "costo": 23924.41, "cantidad": 1378.0}], "cats": {"FRUVER": 23924.41}}}}, "Mayo": {"total": 767964.5, "bodegas": {"COCINA": {"total": 767964.5, "tipos": {"Baja Pruebas": 1817.99, "Baja desde Pos": 181854.08, "Merma": 249692.93, "Baja Operación": 334599.5}, "top5": [{"art": "Queso granapadano", "pres": "GR", "costo": 155203.07, "cantidad": 1386.0}, {"art": "Albahaca", "pres": "GR", "costo": 123919.87, "cantidad": 4200.0}, {"art": "Coliflor", "pres": "GR", "costo": 69141.99, "cantidad": 7466.0}, {"art": "Donna margarita", "pres": "UND", "costo": 62607.84, "cantidad": 8.0}, {"art": "Mezclum", "pres": "GR", "costo": 57576.42, "cantidad": 826.0}], "cats": {"DESPENSA": 28575.87, "LACTEOS": 163095.43, "RECETA ALIMENTOS": 210219.7, "FRUVER": 366073.5}}}}, "Junio": {"total": 655504.58, "bodegas": {"COCINA": {"total": 655504.58, "tipos": {"Baja desde Pos": 132805.45, "Merma": 200589.87, "Baja Operación": 322109.26}, "top5": [{"art": "Albahaca", "pres": "GR", "costo": 116672.69, "cantidad": 4428.0}, {"art": "Queso granapadano", "pres": "GR", "costo": 98572.94, "cantidad": 881.0}, {"art": "Mix hongos", "pres": "GR", "costo": 85644.83, "cantidad": 3553.0}, {"art": "Queso stracciatella", "pres": "GR", "costo": 82769.67, "cantidad": 1500.0}, {"art": "Piña", "pres": "GR", "costo": 40659.91, "cantidad": 6032.0}], "cats": {"RECETA ALIMENTOS": 160191.52, "LACTEOS": 190998.13, "FRUVER": 304314.93}}}}}, "tendencia": {"BAR": [144473.76, 1396.09, 0.0, 23924.41, 0.0, 0.0], "COCINA": [803807.73, 596537.16, 880030.84, 552415.96, 767964.5, 655504.58]}}-val">${fmtM(bd.total)}</div><div class="kpi-sub ${vb&&parseFloat(vb)>0?"up":vb&&parseFloat(vb)<0?"down":"neu"}">${vb?(parseFloat(vb)>0?"↑ +":"↓ ")+vb+"% vs "+(prevMes||"—"):fmtK(bd.total)}</div></div>
+const RAW = {"bodegas": ["BAR", "COCINA"], "meses": {"Enero": {"total": 948281.49, "bodegas": {"COCINA": {"total": 803807.73, "tipos": {"Merma": 162553.61, "Baja desde Pos": 174992.92, "Baja Operación": 466261.2}, "top5": [{"art": "Rugula", "pres": "GR", "costo": 205698.34, "cantidad": 2962.0}, {"art": "Mezclum", "pres": "GR", "costo": 129655.34, "cantidad": 1870.0}, {"art": "Queso granapadano", "pres": "GR", "costo": 108572.78, "cantidad": 976.0}, {"art": "Pepperoni tentazione", "pres": "UND", "costo": 63271.25, "cantidad": 7.0}, {"art": "Albahaca", "pres": "GR", "costo": 53511.35, "cantidad": 1899.0}], "cats": {"CARNICOS": 26668.29, "LACTEOS": 131419.88, "RECETA ALIMENTOS": 219963.89, "FRUVER": 425755.67}}, "BAR": {"total": 144473.76, "tipos": {"Baja Operación": 144473.76}, "top5": [{"art": "Tinto ramon bilbao crianza", "pres": "BOTELLA X 750 ML", "costo": 129957.51, "cantidad": 2.0}, {"art": "Hierbabuena", "pres": "GR", "costo": 12257.33, "cantidad": 336.0}, {"art": "Romero", "pres": "GR", "costo": 2258.92, "cantidad": 130.0}], "cats": {"FRUVER": 14516.25, "VINOS": 129957.51}}}}, "Febrero": {"total": 597933.25, "bodegas": {"COCINA": {"total": 596537.16, "tipos": {"Merma": 102858.08, "Baja desde Pos": 169266.04, "Baja Operación": 324413.04}, "top5": [{"art": "Albahaca", "pres": "GR", "costo": 135227.7, "cantidad": 4670.0}, {"art": "Queso granapadano", "pres": "GR", "costo": 78944.55, "cantidad": 694.0}, {"art": "Base masa x und", "pres": "SUBRECETA", "costo": 64440.24, "cantidad": 59.0}, {"art": "Mano di napoli", "pres": "UND", "costo": 45594.06, "cantidad": 3.0}, {"art": "Mezclum", "pres": "GR", "costo": 34998.89, "cantidad": 466.0}], "cats": {"LACTEOS": 94917.74, "RECETA ALIMENTOS": 244059.75, "FRUVER": 257559.67}}, "BAR": {"total": 1396.09, "tipos": {"Baja Operación": 1396.09}, "top5": [{"art": "Naranja tangelo", "pres": "GR", "costo": 1396.09, "cantidad": 126.0}], "cats": {"FRUVER": 1396.09}}}}, "Marzo": {"total": 880030.84, "bodegas": {"COCINA": {"total": 880030.84, "tipos": {"Baja Operación": 216560.1, "Merma": 306139.59, "Baja desde Pos": 357331.15}, "top5": [{"art": "Queso granapadano", "pres": "GR", "costo": 151849.97, "cantidad": 1352.0}, {"art": "Mano di napoli", "pres": "UND", "costo": 91188.12, "cantidad": 6.0}, {"art": "Rugula", "pres": "GR", "costo": 84041.46, "cantidad": 1160.0}, {"art": "Pepperoni tentazione", "pres": "UND", "costo": 72310.0, "cantidad": 8.0}, {"art": "Albahaca", "pres": "GR", "costo": 67048.98, "cantidad": 2554.0}], "cats": {"DESPENSA": 1806.34, "CARNICOS": 28387.79, "LACTEOS": 169075.77, "FRUVER": 249476.9, "RECETA ALIMENTOS": 431284.04}}}}, "Abril": {"total": 576340.37, "bodegas": {"COCINA": {"total": 552415.96, "tipos": {"Merma": 74147.76, "Baja desde Pos": 238079.54, "Baja Operación": 240188.66}, "top5": [{"art": "Mezclum", "pres": "GR", "costo": 110442.57, "cantidad": 1548.0}, {"art": "Albahaca", "pres": "GR", "costo": 73092.28, "cantidad": 2498.0}, {"art": "Base masa x und", "pres": "SUBRECETA", "costo": 53465.46, "cantidad": 51.0}, {"art": "Pepperoni tentazione", "pres": "UND", "costo": 45193.75, "cantidad": 5.0}, {"art": "Queso granapadano", "pres": "GR", "costo": 43471.16, "cantidad": 388.0}], "cats": {"LACTEOS": 44660.71, "FRUVER": 215073.52, "RECETA ALIMENTOS": 292681.73}}, "BAR": {"total": 23924.41, "tipos": {"Baja Operación": 23924.41}, "top5": [{"art": "Jengibre", "pres": "GR", "costo": 23924.41, "cantidad": 1378.0}], "cats": {"FRUVER": 23924.41}}}}, "Mayo": {"total": 767964.5, "bodegas": {"COCINA": {"total": 767964.5, "tipos": {"Baja Pruebas": 1817.99, "Baja desde Pos": 181854.08, "Merma": 249692.93, "Baja Operación": 334599.5}, "top5": [{"art": "Queso granapadano", "pres": "GR", "costo": 155203.07, "cantidad": 1386.0}, {"art": "Albahaca", "pres": "GR", "costo": 123919.87, "cantidad": 4200.0}, {"art": "Coliflor", "pres": "GR", "costo": 69141.99, "cantidad": 7466.0}, {"art": "Donna margarita", "pres": "UND", "costo": 62607.84, "cantidad": 8.0}, {"art": "Mezclum", "pres": "GR", "costo": 57576.42, "cantidad": 826.0}], "cats": {"DESPENSA": 28575.87, "LACTEOS": 163095.43, "RECETA ALIMENTOS": 210219.7, "FRUVER": 366073.5}}}}, "Junio": {"total": 655504.58, "bodegas": {"COCINA": {"total": 655504.58, "tipos": {"Baja desde Pos": 132805.45, "Merma": 200589.87, "Baja Operación": 322109.26}, "top5": [{"art": "Albahaca", "pres": "GR", "costo": 116672.69, "cantidad": 4428.0}, {"art": "Queso granapadano", "pres": "GR", "costo": 98572.94, "cantidad": 881.0}, {"art": "Mix hongos", "pres": "GR", "costo": 85644.83, "cantidad": 3553.0}, {"art": "Queso stracciatella", "pres": "GR", "costo": 82769.67, "cantidad": 1500.0}, {"art": "Piña", "pres": "GR", "costo": 40659.91, "cantidad": 6032.0}], "cats": {"RECETA ALIMENTOS": 160191.52, "LACTEOS": 190998.13, "FRUVER": 304314.93}}}}}, "tendencia": {"BAR": [144473.76, 1396.09, 0.0, 23924.41, 0.0, 0.0], "COCINA": [803807.73, 596537.16, 880030.84, 552415.96, 767964.5, 655504.58]}} = ["Enero","Febrero","Marzo","Abril","Mayo"];
+const COLORS = ["#534AB7","#1D9E75","#EF9F27","#E24B4A","#378ADD","#888780","#D85A30","#0F6E56"];
+const TIPO_C = {"Baja Operación":"#534AB7","Baja guest":"#378ADD","Baja Pruebas":"#EF9F27","Merma":"#E24B4A","Consumo aceite":"#1D9E75","Baja Proveedor":"#888780","Baja desde Pos":"#D85A30","Baja fotos o video creativa":"#B5D4F4","Baja fotos":"#B5D4F4"};
+let charts = {};
+
+function fmt(v){return "$"+Math.round(v).toLocaleString("es-CO")}
+function fmtM(v){return "$"+(v/1e6).toFixed(2)+"M"}
+function fmtK(v){return v>=1e6?"$"+(v/1e6).toFixed(2)+"M":v>=1e3?"$"+Math.round(v/1e3)+"K":fmt(v)}
+function pct(v,t){return t>0?((v/t)*100).toFixed(1)+"%":"0%"}
+function varPct(c,p){return p>0?((c-p)/p*100).toFixed(1):null}
+function pillVar(v){
+  if(v===null) return '<span class="pill neu">N/D</span>';
+  const n=parseFloat(v);
+  if(n>0) return '<span class="pill up">↑ +'+v+'%</span>';
+  if(n<0) return '<span class="pill down">↓ '+v+'%</span>';
+  return '<span class="pill neu">0%</span>';
+}
+function varBadge(v){
+  if(v===null) return "";
+  const n=parseFloat(v);
+  if(n>10) return '<span class="var-badge var-up">↑ +'+v+'% vs mes anterior</span>';
+  if(n<-5) return '<span class="var-badge var-down">↓ '+v+'% vs mes anterior</span>';
+  return '<span class="var-badge var-neu">'+v+'% vs mes anterior</span>';
+}
+function destroyCharts(){Object.values(charts).forEach(c=>c.destroy());charts={}}
+
+function donut(id,data,bgs,lbls){
+  const ctx=document.getElementById(id);if(!ctx)return;
+  if(charts[id]){charts[id].destroy();delete charts[id];}
+  charts[id]=new Chart(ctx,{type:"doughnut",data:{labels:lbls,datasets:[{data,backgroundColor:bgs,borderWidth:3,borderColor:"#fff",hoverOffset:4}]},options:{responsive:true,maintainAspectRatio:false,cutout:"62%",plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>" "+c.label+": "+parseFloat(c.parsed).toFixed(1)+"%"}}}}});
+}
+
+function lineChart(id,datasets,xlabels){
+  const ctx=document.getElementById(id);if(!ctx)return;
+  if(charts[id]){charts[id].destroy();delete charts[id];}
+  charts[id]=new Chart(ctx,{type:"line",data:{labels:xlabels,datasets:datasets.map(d=>{return{label:d.label,data:d.data.map(v=>Math.round(v/1e6*100)/100),borderColor:d.color,backgroundColor:d.color+"15",borderWidth:2.5,tension:0.35,fill:false,pointBackgroundColor:d.color,pointRadius:4,pointHoverRadius:7,borderDash:d.dash||[]}})},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:"index",intersect:false},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>" "+c.dataset.label+": $"+c.parsed.y.toFixed(2)+"M"}}},scales:{x:{grid:{color:"rgba(0,0,0,0.05)"},ticks:{color:"#8a8780",font:{size:11},autoSkip:false}},y:{min:0,grid:{color:"rgba(0,0,0,0.05)"},ticks:{color:"#8a8780",font:{size:11},callback:v=>"$"+v.toFixed(1)+"M"}}}}});
+}
+
+function renderBars(tipos,total,limit){
+  limit=limit||4;
+  return Object.entries(tipos).sort((a,b)=>b[1]-a[1]).slice(0,limit).map(([t,v])=>{
+    const p=(v/total*100),col=TIPO_C[t]||"#888780";
+    return `<div class="bar-row"><span class="bl" title="${t}">${t}</span><div class="bt"><div class="bf" style="width:${Math.max(p,0.5).toFixed(1)}%;background:${col}"></div></div><span class="bp">${p.toFixed(1)}%</span><span class="bv">${fmtK(v)}</span></div>`;
+  }).join("");
+}
+
+function renderTop5(top5){
+  if(!Array.isArray(top5)) {
+    const entries=Object.entries(top5).sort((a,b)=>b[1]-a[1]).slice(0,5);
+    return `<table class="top-tbl"><thead><tr><th>Artículo</th><th>Cant.</th><th>Costo total</th></tr></thead><tbody>`+
+      entries.map(([a,v])=>`<tr><td>${a.charAt(0)+a.slice(1).toLowerCase()}</td><td class="tq">—</td><td class="tc">${fmt(v)}</td></tr>`).join("")+
+    `</tbody></table>`;
+  }
+  return `<table class="top-tbl"><thead><tr><th>Artículo</th><th>Cant.</th><th>Costo total</th></tr></thead><tbody>`+
+    top5.map(a=>{
+      const cantFmt = a.cantidad % 1 === 0 ? a.cantidad.toLocaleString('es-CO') : parseFloat(a.cantidad.toFixed(2)).toLocaleString('es-CO');
+      const pres = a.pres && a.pres !== 'SUBRECETA' ? a.pres : '';
+      const cantStr = pres ? cantFmt + ' ' + pres : cantFmt;
+      return `<tr><td>${a.art}</td><td class="tq">${cantStr}</td><td class="tc">${fmt(a.costo)}</td></tr>`;
+    }).join("")+
+  `</tbody></table>`;
+}
+
+function renderLegend(tipos){
+  return Object.keys(tipos).sort((a,b)=>tipos[b]-tipos[a]).slice(0,5).map(t=>{
+    const col=TIPO_C[t]||"#888780";
+    return `<span class="leg"><span class="leg-sq" style="background:${col}"></span>${t}</span>`;
+  }).join("");
+}
+
+
+function genAlerts(bodegas, mesData, prevData, total) {
+  const alerts = [];
+  bodegas.forEach((b,i) => {
+    const bd = mesData.bodegas[b];
+    const prevBd = prevData ? prevData.bodegas[b] : null;
+    const vb = prevBd ? parseFloat(varPct(bd.total, prevBd.total)) : null;
+    const tipos = bd.tipos || {};
+    const bodTotal = bd.total;
+
+    // Alerta: incremento critico > 30%
+    if (vb !== null && vb > 30) {
+      const tipo_dom = Object.entries(tipos).sort((a,b)=>b[1]-a[1])[0];
+      alerts.push({ kind:'red', bod:b,
+        title: b + ' — ↑ +' + vb.toFixed(1) + '% vs mes anterior',
+        text: 'Incremento de ' + fmtK(bd.total - (prevBd?prevBd.total:0)) + ' adicionales. ' +
+              (tipo_dom ? 'Tipo dominante: ' + tipo_dom[0] + ' (' + pct(tipo_dom[1],bodTotal) + ').' : '')
+      });
+    }
+
+    // Alerta: baja guest > 40% del total bodega
+    const guest = tipos['Baja guest'] || 0;
+    if (guest > 0 && guest/bodTotal > 0.4) {
+      alerts.push({ kind:'amber', bod:b,
+        title: b + ' — Baja guest ' + pct(guest,bodTotal),
+        text: fmtK(guest) + ' en baja guest (' + pct(guest,bodTotal) + '). Verificar presupuesto asignado y aprobación por evento.'
+      });
+    }
+
+    // Alerta: merma > 20% del total bodega
+    const merma = tipos['Merma'] || 0;
+    if (merma > 0 && merma/bodTotal > 0.2) {
+      alerts.push({ kind:'red', bod:b,
+        title: b + ' — Merma elevada ' + pct(merma,bodTotal),
+        text: fmtK(merma) + ' en merma (' + pct(merma,bodTotal) + '). Revisar rotación FIFO y cadena de frío.'
+      });
+    }
+
+    // Alerta: baja pruebas > 25%
+    const pruebas = tipos['Baja Pruebas'] || 0;
+    if (pruebas > 0 && pruebas/bodTotal > 0.25) {
+      alerts.push({ kind:'amber', bod:b,
+        title: b + ' — Baja pruebas ' + pct(pruebas,bodTotal),
+        text: fmtK(pruebas) + ' en pruebas (' + pct(pruebas,bodTotal) + '). Establecer límite por sesión y aprobación de líder.'
+      });
+    }
+
+    // OK: reduccion > 10%
+    if (vb !== null && vb < -10) {
+      alerts.push({ kind:'green', bod:b,
+        title: b + ' — ↓ ' + vb.toFixed(1) + '% vs mes anterior',
+        text: 'Reducción de ' + fmtK(Math.abs(bd.total - (prevBd?prevBd.total:0))) + '. Buen control operativo.'
+      });
+    }
+  });
+
+  if (alerts.length === 0) {
+    alerts.push({ kind:'green', bod:'',
+      title: 'Sin alertas críticas este mes',
+      text: 'Todos los indicadores dentro de rangos normales para ' + SITE + '.'
+    });
+  }
+  return alerts;
+}
+
+function renderAlerts(alerts) {
+  return alerts.map(a => {
+    const bg   = a.kind==='red' ? '#FCEBEB' : a.kind==='amber' ? '#FAEEDA' : '#E1F5EE';
+    const txt  = a.kind==='red' ? '#501313' : a.kind==='amber' ? '#412402' : '#04342C';
+    const icon = a.kind==='red' ? '&#9888;' : a.kind==='amber' ? '!' : '&#10003;';
+    const ibg  = a.kind==='red' ? '#E24B4A' : a.kind==='amber' ? '#EF9F27' : '#1D9E75';
+    const hint = a.bod ? '<span style="font-size:10px;font-weight:400;opacity:.6;margin-left:6px">Ver detalle →</span>' : '';
+    let div = '<div style="display:flex;gap:12px;align-items:flex-start;background:'+bg+';border-radius:10px;padding:12px 14px;margin-bottom:8px"';
+    if(a.bod){
+      const tabId = a.bod.replace(/ /g,'_');
+      div += ' onclick="switchTab(\'' + tabId + '\',document.getElementById(\'tab-' + tabId + '\'))" style="display:flex;gap:12px;align-items:flex-start;background:'+bg+';border-radius:10px;padding:12px 14px;margin-bottom:8px;cursor:pointer"';
+    }
+    div += '>';
+    div += '<div style="width:28px;height:28px;border-radius:50%;background:'+ibg+';display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0;margin-top:1px">'+icon+'</div>';
+    div += '<div style="flex:1;min-width:0">';
+    div += '<div style="font-size:12px;font-weight:600;color:'+txt+';line-height:1.3;margin-bottom:3px;display:flex;align-items:center;flex-wrap:wrap;gap:4px">'+a.title+hint+'</div>';
+    div += '<div style="font-size:11px;color:'+txt+';opacity:.85;line-height:1.55">'+a.text+'</div>';
+    div += '</div></div>';
+    return div;
+  }).join('');
+}
+
+function onMesChange(){
+  destroyCharts();
+  const mes=document.getElementById("selMes").value;
+  document.getElementById("topBadge").textContent=SITE+" · "+mes+" 2026";
+  renderContent(mes);
+}
+
+function renderContent(mes){
+  const content=document.getElementById("mainContent");
+  const sData=RAW;
+  const mesData=sData.meses[mes];
+
+  if(!mesData){
+    content.innerHTML=`<div class="no-data-msg"><div style="font-size:32px;margin-bottom:12px">📭</div><div style="font-weight:500;margin-bottom:6px">Sin datos para ${SITE} — ${mes} 2026</div><div style="font-size:12px">Este sitio no registra bajas en el período seleccionado.</div></div>`;
+    return;
+  }
+
+  const bodegas=Object.keys(mesData.bodegas);
+  const total=mesData.total;
+  const mesIdx=MESES.indexOf(mes);
+  const prevMes=mesIdx>0?MESES[mesIdx-1]:null;
+  const prevData=prevMes?sData.meses[prevMes]:null;
+  const prevTotal=prevData?prevData.total:0;
+  const vTotal=prevTotal>0?varPct(total,prevTotal):null;
+
+  // TABS
+  let tabsHtml=`<div class="nav-tabs no-print"><button class="tab-btn active" id="tab-resumen" onclick="switchTab('resumen',this)">Resumen ${SITE}</button>`;
+  bodegas.forEach(b=>{const id=b.replace(/ /g,"_");tabsHtml+=`<button class="tab-btn" id="tab-${id}" onclick="switchTab('${id}',this)">${b.charAt(0)+b.slice(1).toLowerCase()}</button>`;});
+  tabsHtml+=`<button class="tab-btn" id="tab-tendencia" onclick="switchTab('tendencia',this)">Tendencia mensual</button></div>`;
+
+  // KPI strip
+  const kpiCols=Math.min(bodegas.length+1,5);
+  let kpiHtml=`<div class="kpi-strip" style="grid-template-columns:repeat(${kpiCols},1fr)"><div class="kpi"><div class="kpi-lbl">Total ${SITE}</div><div class="kpi-val">${fmtM(total)}</div><div class="kpi-sub ${parseFloat(vTotal)>0?"up":parseFloat(vTotal)<0?"down":"neu"}">${vTotal?(parseFloat(vTotal)>0?"↑ +":"↓ ")+vTotal+"% vs "+prevMes:"Base"}</div></div>`;
+  bodegas.forEach((b,i)=>{
+    const bd=mesData.bodegas[b];
+    const prevBd=prevData?prevData.bodegas[b]:null;
+    const vb=prevBd?varPct(bd.total,prevBd.total):null;
+    const id=b.replace(/ /g,"_");
+    kpiHtml+=`<div class="kpi clickable" onclick="switchTab('${id}',document.getElementById('tab-${id}'))"><div class="kpi-lbl">${b} →</div><div class="kpi-val">${fmtM(bd.total)}</div><div class="kpi-sub ${vb&&parseFloat(vb)>0?"up":vb&&parseFloat(vb)<0?"down":"neu"}">${vb?(parseFloat(vb)>0?"↑ +":"↓ ")+vb+"% vs "+(prevMes||"—"):fmtK(bd.total)}</div></div>`;
+  });
+  kpiHtml+=`</div>`;
+
+  // Summary table
+  let sumRows=bodegas.map(b=>{
+    const bd=mesData.bodegas[b];const prevBd=prevData?prevData.bodegas[b]:null;
+    const vb=prevBd?varPct(bd.total,prevBd.total):null;
+    const topTipo=Object.entries(bd.tipos).sort((a,b)=>b[1]-a[1])[0];
+    return `<tr><td>${b}</td><td>${fmt(bd.total)}</td><td>${pct(bd.total,total)}</td><td>${pillVar(vb)}</td><td>${topTipo?topTipo[0]+" ("+pct(topTipo[1],bd.total)+")":"—"}</td></tr>`;
+  }).join("");
+  sumRows+=`<tr><td>Total ${SITE}</td><td>${fmt(total)}</td><td>100%</td><td>${pillVar(vTotal)}</td><td>—</td></tr>`;
+
+  const donutData=bodegas.map(b=>parseFloat(pct(mesData.bodegas[b].total,total)));
+  const donutColors=bodegas.map((_,i)=>COLORS[i%COLORS.length]);
+  const legendItems=bodegas.map((b,i)=>`<span class="leg"><span class="leg-sq" style="background:${COLORS[i%COLORS.length]}"></span>${b} ${pct(mesData.bodegas[b].total,total)}</span>`).join("");
+
+  const alerts = genAlerts(bodegas, mesData, prevData, total);
+  const alertsHtml = renderAlerts(alerts);
+
+  let resumenView=`<div id="view-resumen" class="fade">
+    <div class="view-header">
+      <div class="view-icon" style="background:var(--purple-lt)">📊</div>
+      <div><div class="view-title">Resumen ${SITE} — ${mes} 2026</div><div class="view-sub">Haz clic en una alerta para ir al detalle de esa bodega</div></div>
+      ${varBadge(vTotal)}
+    </div>
+    ${kpiHtml}
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+      <div style="font-size:10px;font-weight:600;color:var(--ink-3);text-transform:uppercase;letter-spacing:.6px">Alertas por bodega</div>
+      <div style="font-size:10px;color:var(--ink-3)">Toca una alerta para ver el detalle</div>
+    </div>
+    <div style="margin-bottom:16px">${alertsHtml}</div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">Participación por bodega</div>
+        <div class="chart-h200"><canvas id="cResumen" role="img" aria-label="Participacion por bodega">${bodegas.map(b=>b+" "+pct(mesData.bodegas[b].total,total)).join(", ")}</canvas></div>
+        <div class="legend">${legendItems}</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Comparativo${prevMes?" — "+mes+" vs "+prevMes:""}</div>
+        <div class="sum-tbl-wrap"><table class="sum-tbl">
+          <thead><tr><th>Bodega</th><th>Total</th><th>% sitio</th><th>Var</th><th>Tipo dominante</th></tr></thead>
+          <tbody>${sumRows}</tbody>
+        </table></div>
+        <div class="note" style="margin-top:12px">Todas las cifras en pesos colombianos (COP). <strong>$X,XXM = millones de pesos.</strong></div>
+      </div>
+    </div>
+  </div>`;
+
+  // Bodega views
+  let bodegaViews="";
+  bodegas.forEach((b,bi)=>{
+    const bd=mesData.bodegas[b];const prevBd=prevData?prevData.bodegas[b]:null;
+    const vb=prevBd?varPct(bd.total,prevBd.total):null;
+    const id=b.replace(/ /g,"_");
+    const topTipo=Object.entries(bd.tipos).sort((a,b)=>b[1]-a[1])[0];
+    const topTipo2=Object.entries(bd.tipos).sort((a,b)=>b[1]-a[1])[1];
+    const dEntries=Object.entries(bd.tipos).sort((a,b)=>b[1]-a[1]).slice(0,5);
+
+    bodegaViews+=`<div id="view-${id}" style="display:none">
+      <div class="view-header">
+        <div class="view-icon" style="background:${COLORS[bi%COLORS.length]}22;font-size:18px">🏪</div>
+        <div><div class="view-title">Bodega ${b}</div><div class="view-sub">${pct(bd.total,total)} del total ${SITE} · ${mes} 2026</div></div>
+        ${varBadge(vb)}
+      </div>
+      <div class="kpi-strip" style="grid-template-columns:repeat(4,1fr)">
+        <div class="kpi"><div class="kpi-lbl">Total ${b}</div><div class="kpi-val">${fmtM(bd.total)}</div><div class="kpi-sub ${vb&&parseFloat(vb)>0?"up":vb&&parseFloat(vb)<0?"down":"neu"}">${vb?(parseFloat(vb)>0?"↑ +":"↓ ")+vb+"% vs "+(prevMes||"—"):fmtK(bd.total)}</div></div>
         <div class="kpi"><div class="kpi-lbl">${topTipo?topTipo[0]:""}</div><div class="kpi-val">${topTipo?pct(topTipo[1],bd.total):"—"}</div><div class="kpi-sub neu">${topTipo?fmtK(topTipo[1]):""}</div></div>
         <div class="kpi"><div class="kpi-lbl">${topTipo2?topTipo2[0]:""}</div><div class="kpi-val">${topTipo2?pct(topTipo2[1],bd.total):"—"}</div><div class="kpi-sub neu">${topTipo2?fmtK(topTipo2[1]):""}</div></div>
         <div class="kpi"><div class="kpi-lbl">% del sitio</div><div class="kpi-val">${pct(bd.total,total)}</div><div class="kpi-sub neu">${SITE} ${mes}</div></div>
@@ -265,47 +526,6 @@ const RAW = {"bodegas": ["BAR", "COCINA"], "meses": {"Enero": {"total": 948281.4
 
   content.innerHTML=`<div class="inner">${tabsHtml}${resumenView}${bodegaViews}${tendenciaView}</div>`;
   setTimeout(()=>donut("cResumen",donutData,donutColors,bodegas),60);
-}
-
-
-function genAlerts(bodegas,mesData,prevData,total){
-  const alerts=[];
-  bodegas.forEach((b)=>{
-    const bd=mesData.bodegas[b];
-    const prevBd=prevData?prevData.bodegas[b]:null;
-    const vb=prevBd?parseFloat(varPct(bd.total,prevBd.total)):null;
-    const tipos=bd.tipos||{};
-    const bodTotal=bd.total;
-    const guest=tipos['Baja guest']||0;
-    const merma=tipos['Merma']||0;
-    const pruebas=tipos['Baja Pruebas']||0;
-    if(vb!==null&&vb>30){
-      const td=Object.entries(tipos).sort((a,b)=>b[1]-a[1])[0];
-      alerts.push({kind:'red',bod:b,title:b+' — ↑ +'+vb.toFixed(1)+'% vs mes anterior',
-        text:'Incremento de '+fmtK(bd.total-(prevBd?prevBd.total:0))+' adicionales.'+(td?' Tipo dominante: '+td[0]+' ('+pct(td[1],bodTotal)+').':'')});
-    }
-    if(guest>0&&guest/bodTotal>0.4) alerts.push({kind:'amber',bod:b,title:b+' — Baja guest '+pct(guest,bodTotal),text:fmtK(guest)+' en baja guest ('+pct(guest,bodTotal)+'). Verificar presupuesto asignado y aprobación por evento.'});
-    if(merma>0&&merma/bodTotal>0.2) alerts.push({kind:'red',bod:b,title:b+' — Merma elevada '+pct(merma,bodTotal),text:fmtK(merma)+' en merma ('+pct(merma,bodTotal)+'). Revisar rotación FIFO y cadena de frío.'});
-    if(pruebas>0&&pruebas/bodTotal>0.25) alerts.push({kind:'amber',bod:b,title:b+' — Baja pruebas '+pct(pruebas,bodTotal),text:fmtK(pruebas)+' en pruebas ('+pct(pruebas,bodTotal)+'). Establecer límite por sesión y aprobación de líder.'});
-    if(vb!==null&&vb<-10) alerts.push({kind:'green',bod:b,title:b+' — ↓ '+vb.toFixed(1)+'% vs mes anterior',text:'Reducción de '+fmtK(Math.abs(bd.total-(prevBd?prevBd.total:0)))+'. Buen control operativo.'});
-  });
-  if(alerts.length===0) alerts.push({kind:'green',bod:'',title:'Sin alertas críticas este mes',text:'Todos los indicadores dentro de rangos normales para '+SITE+'.'});
-  return alerts;
-}
-function renderAlerts(alerts){
-  return alerts.map(a=>{
-    const bg=a.kind==='red'?'#FCEBEB':a.kind==='amber'?'#FAEEDA':'#E1F5EE';
-    const txt=a.kind==='red'?'#501313':a.kind==='amber'?'#412402':'#04342C';
-    const icon=a.kind==='red'?'&#9888;':a.kind==='amber'?'!':'&#10003;';
-    const ibg=a.kind==='red'?'#E24B4A':a.kind==='amber'?'#EF9F27':'#1D9E75';
-    const hint=a.bod?'<span style="font-size:10px;font-weight:400;opacity:.6;margin-left:6px">Ver detalle →</span>':'';
-    let div='<div style="display:flex;gap:12px;align-items:flex-start;background:'+bg+';border-radius:10px;padding:12px 14px;margin-bottom:8px"';
-    if(a.bod){const tid=a.bod.replace(/ /g,'_');div+=' onclick="switchTab(\''+tid+'\',document.getElementById(\'tab-'+tid+'\'))" style="display:flex;gap:12px;align-items:flex-start;background:'+bg+';border-radius:10px;padding:12px 14px;margin-bottom:8px;cursor:pointer"';}
-    div+='><div style="width:28px;height:28px;border-radius:50%;background:'+ibg+';display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0;margin-top:1px">'+icon+'</div>';
-    div+='<div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:600;color:'+txt+';line-height:1.3;margin-bottom:3px;display:flex;align-items:center;flex-wrap:wrap;gap:4px">'+a.title+hint+'</div>';
-    div+='<div style="font-size:11px;color:'+txt+';opacity:.85;line-height:1.55">'+a.text+'</div></div></div>';
-    return div;
-  }).join('');
 }
 
 function switchTab(name,btn){

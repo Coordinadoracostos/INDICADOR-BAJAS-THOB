@@ -267,6 +267,47 @@ const RAW = {"bodegas": ["BAR", "COCINA"], "meses": {"Enero": {"total": 948281.4
   setTimeout(()=>donut("cResumen",donutData,donutColors,bodegas),60);
 }
 
+
+function genAlerts(bodegas,mesData,prevData,total){
+  const alerts=[];
+  bodegas.forEach((b)=>{
+    const bd=mesData.bodegas[b];
+    const prevBd=prevData?prevData.bodegas[b]:null;
+    const vb=prevBd?parseFloat(varPct(bd.total,prevBd.total)):null;
+    const tipos=bd.tipos||{};
+    const bodTotal=bd.total;
+    const guest=tipos['Baja guest']||0;
+    const merma=tipos['Merma']||0;
+    const pruebas=tipos['Baja Pruebas']||0;
+    if(vb!==null&&vb>30){
+      const td=Object.entries(tipos).sort((a,b)=>b[1]-a[1])[0];
+      alerts.push({kind:'red',bod:b,title:b+' — ↑ +'+vb.toFixed(1)+'% vs mes anterior',
+        text:'Incremento de '+fmtK(bd.total-(prevBd?prevBd.total:0))+' adicionales.'+(td?' Tipo dominante: '+td[0]+' ('+pct(td[1],bodTotal)+').':'')});
+    }
+    if(guest>0&&guest/bodTotal>0.4) alerts.push({kind:'amber',bod:b,title:b+' — Baja guest '+pct(guest,bodTotal),text:fmtK(guest)+' en baja guest ('+pct(guest,bodTotal)+'). Verificar presupuesto asignado y aprobación por evento.'});
+    if(merma>0&&merma/bodTotal>0.2) alerts.push({kind:'red',bod:b,title:b+' — Merma elevada '+pct(merma,bodTotal),text:fmtK(merma)+' en merma ('+pct(merma,bodTotal)+'). Revisar rotación FIFO y cadena de frío.'});
+    if(pruebas>0&&pruebas/bodTotal>0.25) alerts.push({kind:'amber',bod:b,title:b+' — Baja pruebas '+pct(pruebas,bodTotal),text:fmtK(pruebas)+' en pruebas ('+pct(pruebas,bodTotal)+'). Establecer límite por sesión y aprobación de líder.'});
+    if(vb!==null&&vb<-10) alerts.push({kind:'green',bod:b,title:b+' — ↓ '+vb.toFixed(1)+'% vs mes anterior',text:'Reducción de '+fmtK(Math.abs(bd.total-(prevBd?prevBd.total:0)))+'. Buen control operativo.'});
+  });
+  if(alerts.length===0) alerts.push({kind:'green',bod:'',title:'Sin alertas críticas este mes',text:'Todos los indicadores dentro de rangos normales para '+SITE+'.'});
+  return alerts;
+}
+function renderAlerts(alerts){
+  return alerts.map(a=>{
+    const bg=a.kind==='red'?'#FCEBEB':a.kind==='amber'?'#FAEEDA':'#E1F5EE';
+    const txt=a.kind==='red'?'#501313':a.kind==='amber'?'#412402':'#04342C';
+    const icon=a.kind==='red'?'&#9888;':a.kind==='amber'?'!':'&#10003;';
+    const ibg=a.kind==='red'?'#E24B4A':a.kind==='amber'?'#EF9F27':'#1D9E75';
+    const hint=a.bod?'<span style="font-size:10px;font-weight:400;opacity:.6;margin-left:6px">Ver detalle →</span>':'';
+    let div='<div style="display:flex;gap:12px;align-items:flex-start;background:'+bg+';border-radius:10px;padding:12px 14px;margin-bottom:8px"';
+    if(a.bod){const tid=a.bod.replace(/ /g,'_');div+=' onclick="switchTab(\''+tid+'\',document.getElementById(\'tab-'+tid+'\'))" style="display:flex;gap:12px;align-items:flex-start;background:'+bg+';border-radius:10px;padding:12px 14px;margin-bottom:8px;cursor:pointer"';}
+    div+='><div style="width:28px;height:28px;border-radius:50%;background:'+ibg+';display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0;margin-top:1px">'+icon+'</div>';
+    div+='<div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:600;color:'+txt+';line-height:1.3;margin-bottom:3px;display:flex;align-items:center;flex-wrap:wrap;gap:4px">'+a.title+hint+'</div>';
+    div+='<div style="font-size:11px;color:'+txt+';opacity:.85;line-height:1.55">'+a.text+'</div></div></div>';
+    return div;
+  }).join('');
+}
+
 function switchTab(name,btn){
   const mes=document.getElementById("selMes").value;
   const sData=RAW;
